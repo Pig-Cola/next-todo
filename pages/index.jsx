@@ -10,12 +10,28 @@ const classname = classOption(style)
 
 export default function Home() {
   // data
-  const [todosData, setTodosData] = useState(
-    _(['안녕', '바보', '잘가', '어서와'])
-      .map((v, i) => ({ title: v, position: i, key: `todo-key-${i}` }))
-      .shuffle()
-      .value()
-  )
+  const [todosData, setTodosData] = useState([
+    {
+      title: '안녕',
+      position: 0,
+      key: 'todo-key-0',
+    },
+    {
+      title: '바보',
+      position: 1,
+      key: 'todo-key-1',
+    },
+    {
+      title: '잘가',
+      position: 2,
+      key: 'todo-key-2',
+    },
+    {
+      title: '어서와',
+      position: 3,
+      key: 'todo-key-3',
+    },
+  ])
   // mounted
   useEffect(() => {}, [])
 
@@ -42,7 +58,7 @@ export default function Home() {
               </MyIcon>
             </div>
             <div className={classname('todo-title')}>{title}</div>
-            <div className={classname('todo-description')}>{`${title}-${position}`}</div>
+            <div className={classname('todo-description')}>{`${title}-의 설명`}</div>
           </div>
         )
       })
@@ -56,7 +72,7 @@ export default function Home() {
   // methods
   /**@type {import('react').ReactEventHandler} */
   function swapUp(e, position) {
-    if (position < 1) {
+    if (position <= 0) {
       return
     }
     let temp = _(todosData)
@@ -103,10 +119,7 @@ export default function Home() {
 
       <div className={classname('main')}>
         <div className={classname('todo-list-area')}>
-          <div className={classname('title')}>
-            Todo List
-            <MyIcon>power</MyIcon>
-          </div>
+          <div className={classname('title')}>Todo List</div>
           <div className={classname('todos')}>{todos}</div>
         </div>
       </div>

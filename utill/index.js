@@ -1,9 +1,25 @@
+import _ from 'lodash'
+
 /**@typedef {{[x:string]: boolean}} option_obj */
 /**@typedef {(string|number|option_obj)[]} option_arr */
 /**@typedef {string|number|option_arr|option_obj} option */
 
-/**@type {(style:{[x:string]:string})=>(...options:option[])=>string} */
-export const classOption = (style={}) => {
+/**
+ * @type {(style:{[x:string]:string})=>(...options:option[])=>string}
+ * 
+ * #### ex)
+ * ``` jsx
+ * import { classOption } from '~~'
+ * import style from '~~.module.css'
+ * const classname = classOption(style)
+ * 
+ * ...
+ * 
+ * <div className={classname({isRed: true})}></div>
+ * ```
+ */
+
+export const classOption = (style = {}) => {
   return (...options) => {
     let result = []
     options.forEach((v) => {
@@ -18,9 +34,11 @@ export const classOption = (style={}) => {
         }
         case 'object': {
           if (!Array.isArray(v)) {
-            let temp = Object.entries(v)
+            let temp = _(v)
+              .toPairs()
               .filter(([x, bool]) => bool)
               .map(([x, bool]) => x)
+              .value()
 
             result.push(...temp)
           } else {
@@ -53,9 +71,11 @@ function classOptionArr(optionArr) {
       }
       case 'object': {
         if (!Array.isArray(v)) {
-          let temp = Object.entries(v)
-            .filter(([x, bool]) => bool)
-            .map(([x, bool]) => x)
+          let temp = _(v)
+          .toPairs()
+          .filter(([x, bool]) => bool)
+          .map(([x, bool]) => x)
+          .value()
 
           result.push(...temp)
         }
