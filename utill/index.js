@@ -3,7 +3,7 @@
 /**@typedef {string|number|option_arr|option_obj} option */
 
 /**@type {(style:{[x:string]:string})=>(...options:option[])=>string} */
-export const classOption = (style) => {
+export const classOption = (style={}) => {
   return (...options) => {
     let result = []
     options.forEach((v) => {
