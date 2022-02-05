@@ -65,10 +65,6 @@ export default function Home() {
       .value()
   }, [todosData])
 
-  const todosDataMap = useMemo(() => {
-    return _(todosData).keyBy('position').value()
-  }, [todosData])
-
   // methods
   /**@type {import('react').ReactEventHandler} */
   function swapUp(e, position) {
