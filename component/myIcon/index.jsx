@@ -8,12 +8,7 @@ import { useMemo } from 'react'
 const classname = classOption(style)
 
 /**@type {(props:{children: string, className: string})=>JSX.Element} */
-function MyIcon(props) {
-  const { children, className } = props
-  const otherProps = {...props}
-
-  delete otherProps.children
-  delete otherProps.className
+function MyIcon({ children, className, ...otherProps }) {
 
   const text = useMemo(() => _(children).trim(), [children])
   const iconClass = useMemo(() => (text ? 'icon-' + text : ''), [text])

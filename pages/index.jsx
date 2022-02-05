@@ -60,7 +60,7 @@ export default function Home() {
       return
     }
     let temp = _(todosData)
-      .map(({ title, position: p }) => {
+      .map(({ position: p, ...rest }) => {
         let targetP = p
         if (position === p) {
           targetP = p - 1
@@ -68,7 +68,7 @@ export default function Home() {
           targetP = position
         }
 
-        return { title, position: targetP }
+        return { ...rest, position: targetP }
       })
       .value()
     setTodosData(temp)
@@ -80,7 +80,7 @@ export default function Home() {
       return
     }
     let temp = _(todosData)
-      .map(({ title, position: p }) => {
+      .map(({ position: p, ...rest }) => {
         let targetP = p
         if (position === p) {
           targetP = p + 1
@@ -88,7 +88,7 @@ export default function Home() {
           targetP = position
         }
 
-        return { title, position: targetP }
+        return { ...rest, position: targetP }
       })
       .value()
     setTodosData(temp)
