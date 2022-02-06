@@ -9,7 +9,6 @@ const classname = classOption(style)
 
 /**@type {(props:{children: string, className: string})=>JSX.Element} */
 function MyIcon({ children, className, ...otherProps }) {
-
   const text = useMemo(() => _(children).trim(), [children])
   const iconClass = useMemo(() => (text ? 'icon-' + text : ''), [text])
 
