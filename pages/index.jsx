@@ -1,10 +1,11 @@
+import MyIcon from 'component/myIcon'
+import Head from 'next/head'
+
 import _ from 'lodash'
 import style from './index.module.scss'
 import { classOption } from 'utill'
-import MyIcon from 'component/myIcon'
-
-import Head from 'next/head'
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { useTransition, animated } from 'react-spring'
+import { useEffect, useMemo, useState } from 'react'
 
 const classname = classOption(style)
 
@@ -32,6 +33,14 @@ export default function Home() {
       key: 'todo-key-3',
     },
   ])
+
+  // const transition = useTransition(todosData, {
+  //   from: { opacity: 0 },
+  //   leave: { opacity: 0 },
+  //   enter: { opacity: 1 },
+  //   update: ({ position }) => ({ y: position }),
+  // })
+
   // mounted
   useEffect(() => {}, [])
 
