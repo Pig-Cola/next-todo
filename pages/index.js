@@ -6,10 +6,21 @@ import style from './index.module.scss'
 import { classOption } from 'utill'
 import { useTransition, animated } from 'react-spring'
 import { useEffect, useMemo, useState } from 'react'
+import { useSession, signIn, signOut, getSession } from 'next-auth/react'
 
 const classname = classOption(style)
 
+/**@type {import('next').GetServerSideProps} */
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  }
+}
+
 export default function Home() {
+  const { data: session, status } = useSession()
   // data
   const [todosData, setTodosData] = useState([
     {
@@ -123,6 +134,18 @@ export default function Home() {
       </Head>
 
       <div className={classname('main')}>
+        <div className={classname('sign')}>
+          {!session ? (
+            <div className={classname('sign-in')} onClick={() => signIn('kakao')}>
+              로그인
+            </div>
+          ) : (
+            <div className={classname('sign-out')} onClick={signOut}>
+              로그아웃
+            </div>
+          )}
+        </div>
+        <div>{status}</div>
         <div className={classname('todo-list-area')}>
           <div className={classname('title')}>Todo List</div>
           <div className={classname('todos')}>{todos}</div>
