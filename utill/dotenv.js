@@ -2,3 +2,5 @@ export const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET
 export const KAKAO_CLIENT_ID = process.env.KAKAO_CLIENT_ID
 export const KAKAO_CLIENT_SECRET = process.env.KAKAO_CLIENT_SECRET
 export const NODE_TLS_REJECT_UNAUTHORIZED = process.env.NODE_TLS_REJECT_UNAUTHORIZED
+export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET

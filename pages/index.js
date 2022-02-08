@@ -136,7 +136,7 @@ export default function Home() {
       <div className={classname('main')}>
         <div className={classname('sign')}>
           {!session ? (
-            <div className={classname('sign-in')} onClick={() => signIn('kakao')}>
+            <div className={classname('sign-in')} onClick={() => signIn()}>
               로그인
             </div>
           ) : (
