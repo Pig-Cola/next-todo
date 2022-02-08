@@ -1,11 +1,16 @@
+import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, KAKAO_CLIENT_ID, KAKAO_CLIENT_SECRET, NEXTAUTH_SECRET } from 'utill/dotenv'
+
 import NextAuth from 'next-auth'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { PrismaClient } from '@prisma/client'
 import KakaoProvider from 'next-auth/providers/kakao'
 import GoogleProvider from 'next-auth/providers/google'
 
-import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, KAKAO_CLIENT_ID, KAKAO_CLIENT_SECRET, NEXTAUTH_SECRET } from 'utill/dotenv'
+const prisma = new PrismaClient()
 
 export default NextAuth({
   debug: true,
+  adapter: PrismaAdapter(prisma),
   secret: NEXTAUTH_SECRET,
 
   providers: [
@@ -33,7 +38,7 @@ export default NextAuth({
   session: {
     maxAge: 60 * 60 * 24 * 7, // 7 Day
     updateAge: 60 * 60 * 12, // 12 H
-    strategy: 'jwt',
+    strategy: 'database',
   },
   jwt: {
     maxAge: 60 * 60 * 24 * 7, // 7 Day
